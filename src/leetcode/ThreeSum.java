@@ -17,6 +17,32 @@ import java.util.*;
  * ]*/
 public class ThreeSum {
 
+    /* 利用排序再寻找 组合 的方法 来解决去重 */
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new LinkedList<>();
+        Arrays.sort(nums);
+        for(int i = 0; i<nums.length - 2;i++){
+            if(i == 0 || nums[i] != nums[i-1]){
+                int needSum = 0 - nums[i];
+                int lo = i+1;
+                int hi = nums.length - 1;
+                while(lo<hi){
+                    if(nums[lo] + nums[hi] == needSum){
+                        res.add(Arrays.asList(nums[i],nums[lo],nums[hi]));
+                        while(lo<hi && nums[lo] == nums[lo+1]) lo++;
+                        while(lo<hi && nums[hi] == nums[hi-1]) hi--;
+                        lo++;hi--;
+                    }else if(nums[lo] + nums[hi] > needSum){
+                        hi--;
+                    }else{
+                        lo++;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
     /* mySolution 1 效率低*/
     public List<List<Integer>> mySolution(int[] nums) {
         Set<List<Integer>> res= new HashSet<List<Integer>>();
