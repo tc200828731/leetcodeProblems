@@ -15,11 +15,7 @@ import java.util.List;
  *
  * Given n will always be valid.
  */
- class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
- }
+
 public class RemoveNthNodeFromEndofList {
 
     /* mysolution */
