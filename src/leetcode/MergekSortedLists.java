@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
@@ -49,9 +47,34 @@ public class MergekSortedLists {
     }
 
     /* 利用归并 -  优先队列（堆排序）的思想*/
-    /*public ListNode mergeKLists2(ListNode[] lists) {
+    public ListNode mergeKLists2(ListNode[] lists) {
+        Queue<ListNode> queue = new PriorityQueue<>(idComparator);
+        ListNode res = new ListNode(0);
+        ListNode tem = res;
+        for (int i = 0; i < lists.length; i++){
+            if (lists[i] != null) {
+                queue.add(lists[i]);
+            }
+        }
+        while (!queue.isEmpty()){
+            ListNode listNode = queue.poll();
+            tem.next = new ListNode(listNode.val);
+            tem = tem.next;
+            listNode = listNode.next;
+            if(listNode != null){
+                queue.add(listNode);
+            }
+        }
+        return  res.next;
+    }
 
-    }*/
+    //匿名Comparator实现
+    public static Comparator<ListNode> idComparator = new Comparator<ListNode>(){
+        @Override
+        public int compare(ListNode c1, ListNode c2) {
+            return c1.val - c2.val;
+        }
+    };
 
     /*分而治之*/
     public ListNode mergeKLists3(ListNode[] lists){
